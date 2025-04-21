@@ -10,7 +10,7 @@ resource "aws_key_pair" "bastion_key" {
 
 # Output Public IP and Private Key
 output "bastion_public_ip" {
-  value       = aws_instance.bastion.public_ip
+  value       = module.bastion.public_ip
   description = "Use this IP to connect to the Bastion Host"
 }
 
