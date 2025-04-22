@@ -33,79 +33,12 @@ variable "asg_subnets" {
   type        = list(string)
 }
 
-variable "lb_name" {
-  description = "Name of the load balancer"
-  type        = string
-}
-
-variable "lb_internal" {
-  description = "Whether the load balancer is internal"
-  type        = bool
-  default     = false
-}
-
 variable "lb_deletion_protection" {
   description = "Enable deletion protection for the load balancer"
   type        = bool
   default     = false
 }
 
-variable "lb_tags" {
-  description = "Tags for the load balancer"
-  type        = map(string)
-  default     = {}
-}
-
-variable "target_group_name" {
-  description = "Name of the target group"
-  type        = string
-}
-
-variable "target_group_port" {
-  description = "Port for the target group"
-  type        = number
-}
-
-variable "target_group_protocol" {
-  description = "Protocol for the target group"
-  type        = string
-}
-
-variable "health_check_protocol" {
-  description = "Health check protocol"
-  type        = string
-}
-
-variable "health_check_path" {
-  description = "Health check path"
-  type        = string
-}
-
-variable "target_group_tags" {
-  description = "Tags for the target group"
-  type        = map(string)
-  default     = {}
-}
-
-variable "listener_port" {
-  description = "Listener port"
-  type        = number
-}
-
-variable "listener_protocol" {
-  description = "Listener protocol"
-  type        = string
-}
-
-variable "launch_template_name_prefix" {
-  description = "Name prefix for the launch template"
-  type        = string
-}
-
-variable "key_name" {
-  description = "Key name for the instances"
-  type        = string
-}
 
 variable "iam_instance_profile_name" {
   description = "IAM instance profile name"

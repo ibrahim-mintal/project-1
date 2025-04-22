@@ -1,33 +1,38 @@
 # Load Balancer (ALB) and Auto Scaling Group combined module
 
 resource "aws_lb" "myelb" {
-  name                       = var.lb_name
-  internal                   = var.lb_internal
+  name                       = "Ibrahim-ELB"
   load_balancer_type         = "application"
   security_groups            = var.lb_security_groups
   subnets                    = var.lb_subnets
   enable_deletion_protection = var.lb_deletion_protection
-  tags                       = var.lb_tags
+  
+  tags = {
+    Name = "Ibrahim App"
+  }
 }
 
 resource "aws_lb_target_group" "target_Group" {
-  name     = var.target_group_name
-  port     = var.target_group_port
-  protocol = var.target_group_protocol
+  name     = "TG-ibrahim"
+  port     = 80
+  protocol = "HTTP"
   vpc_id   = var.vpc_id
 
   health_check {
-    protocol = var.health_check_protocol
-    path     = var.health_check_path
+    protocol = "HTTP"
+    path     = "/"
   }
 
-  tags = var.target_group_tags
+ tags = {
+    Name = "TG-ibrahim"
+  }
 }
+
 
 resource "aws_lb_listener" "target_Group" {
   load_balancer_arn = aws_lb.myelb.arn
-  port              = var.listener_port
-  protocol          = var.listener_protocol
+  port              = 80
+  protocol          = "HTTP"
 
   default_action {
     type             = "forward"
@@ -36,12 +41,14 @@ resource "aws_lb_listener" "target_Group" {
 }
 
 resource "aws_launch_template" "app" {
-  name_prefix   = var.launch_template_name_prefix
+  name_prefix   = "app-launch-template-"
   image_id      = var.image_id
   instance_type = var.instance_type
-  key_name      = var.key_name
+  key_name      = "bastion-key"
 
   vpc_security_group_ids = var.instance_security_groups
+    user_data = base64encode(var.user_data)
+
 
   iam_instance_profile {
     name = var.iam_instance_profile_name
