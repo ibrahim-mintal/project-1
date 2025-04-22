@@ -58,14 +58,14 @@ resource "aws_launch_template" "app" {
 }
 
 resource "aws_autoscaling_group" "app" {
-  name                = var.asg_name
-  max_size            = var.asg_max_size
-  min_size            = var.asg_min_size
-  desired_capacity    = var.asg_desired_capacity
+  name                = "asg-app"
+  max_size            = 3
+  min_size            = 1
+  desired_capacity    = 2
   vpc_zone_identifier = var.asg_subnets
   target_group_arns   = [aws_lb_target_group.target_Group.arn]
-  health_check_type   = var.asg_health_check_type
-  force_delete        = var.asg_force_delete
+  health_check_type   = "EC2"
+  force_delete        = true
 
   launch_template {
     id      = aws_launch_template.app.id
@@ -74,7 +74,7 @@ resource "aws_autoscaling_group" "app" {
 
   tag {
     key                 = "Name"
-    value               = var.asg_tag_name
+    value               = "ASG_Instance"
     propagate_at_launch = true
   }
 }
