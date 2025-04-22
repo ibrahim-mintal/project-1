@@ -51,7 +51,7 @@ module "bastion" {
 }
 
 module "loadbalancer_asg" {
-  source = "./modules/loadbalancer_asg"
+  source = "./modules/ALB_ASG"
 
   lb_name                   = "ALB-ibrahim"
   lb_internal               = false
