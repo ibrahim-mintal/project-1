@@ -5,6 +5,7 @@ bastion_key.pem
 *.tfstate
 *.tfstate.*
 
+*.pem
 # Crash log files
 crash.log
 crash.*.log
