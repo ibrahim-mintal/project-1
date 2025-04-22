@@ -1,6 +1,6 @@
 # Local .terraform directories
 **/.terraform/*
-
+bastion_key.pem
 # .tfstate files
 *.tfstate
 *.tfstate.*
