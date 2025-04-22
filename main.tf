@@ -76,11 +76,7 @@ module "loadbalancer_asg" {
   iam_instance_profile_name = aws_iam_instance_profile.ec2_profile.name
 
   asg_name                 = "asg-app"
-  asg_max_size             = 3
-  asg_min_size             = 1
-  asg_desired_capacity     = 2
+
   asg_subnets              = [module.network.private_subnet1_id, module.network.private_subnet2_id]
-  asg_health_check_type    = "EC2"
-  asg_force_delete         = true
-  asg_tag_name             = "ASG_Instance"
+ 
 }

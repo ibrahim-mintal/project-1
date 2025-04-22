@@ -50,36 +50,6 @@ variable "asg_name" {
   type        = string
 }
 
-variable "asg_max_size" {
-  description = "Maximum size of the auto scaling group"
-  type        = number
-}
-
-variable "asg_min_size" {
-  description = "Minimum size of the auto scaling group"
-  type        = number
-}
-
-variable "asg_desired_capacity" {
-  description = "Desired capacity of the auto scaling group"
-  type        = number
-}
-
-variable "asg_health_check_type" {
-  description = "Health check type for the auto scaling group"
-  type        = string
-}
-
-variable "asg_force_delete" {
-  description = "Force delete the auto scaling group"
-  type        = bool
-}
-
-variable "asg_tag_name" {
-  description = "Tag name for the auto scaling group instances"
-  type        = string
-}
-
 variable "user_data" {
   description = "User data script for the launch template"
   type        = string
