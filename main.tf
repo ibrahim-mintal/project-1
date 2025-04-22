@@ -53,28 +53,12 @@ module "bastion" {
 module "loadbalancer_asg" {
   source = "./modules/ALB_ASG"
 
-  lb_name                   = "ALB-ibrahim"
-  lb_internal               = false
   lb_security_groups        = [aws_security_group.sg-http.id]
   lb_subnets                = [module.network.public_subnet1_id, module.network.public_subnet2_id]
   lb_deletion_protection    = false
-  lb_tags                   = { Name = "Ibrahim App" }
-
-  target_group_name         = "TG-ibrahim"
-  target_group_port         = 80
-  target_group_protocol     = "HTTP"
   vpc_id                   = module.network.vpc_id
-  health_check_protocol     = "HTTP"
-  health_check_path         = "/"
-  target_group_tags         = { Name = "TG-ibrahim" }
-
-  listener_port            = 80
-  listener_protocol        = "HTTP"
-
-  launch_template_name_prefix = "app-launch-template-"
   image_id                  = var.image_id
   instance_type             = var.aws_instance_type
-  key_name                  = "bastion-key"
   instance_security_groups  = [aws_security_group.sg-http.id]
   user_data                 = <<-EOF
     #!/bin/bash
@@ -84,6 +68,10 @@ module "loadbalancer_asg" {
     cd /home/ec2-user
     nohup python3 -m http.server 80 &
   EOF
+
+
+
+
 
   iam_instance_profile_name = aws_iam_instance_profile.ec2_profile.name
 
